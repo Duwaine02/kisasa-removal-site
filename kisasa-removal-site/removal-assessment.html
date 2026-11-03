@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Debt Review Removal Eligibility Check | Kisasa</title>
+
+  <style>
+    :root {
+      --blue: #007DA7;
+      --blue-dark: #006288;
+      --navy: #0B2C3D;
+      --text: #121212;
+      --muted: #555;
+      --light: #F7F9FA;
+      --white: #FFFFFF;
+      --border: #E5E9EC;
+      --warning: #C47A00;
+      --success: #147A4B;
+      --error: #B42318;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.55;
+      background: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    .back {
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .back:hover { color: var(--blue); }
+    .logo img { height: 32px; width: auto; }
+
+    main {
+      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+      width: 100%;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #E8F4F8;
+      color: var(--blue);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 0.4rem 0.9rem;
+      border-radius: 4px;
+      margin-bottom: 1.4rem;
+      border: 1px solid #C5E0EB;
+    }
+
+    h1 {
+      font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.9rem;
+      text-align: center;
+    }
+
+    .intro {
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.02rem;
+      margin-bottom: 1.4rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .trust-row span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .warning-box {
+      background: #FFF8EE;
+      border: 1px solid #F0D9A8;
+      color: var(--warning);
+      font-size: 0.82rem;
+      padding: 0.7rem 1rem;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 2.2rem;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .progress-wrap { margin-bottom: 1.8rem; }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: #E8EEF1;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 3px;
+      transition: width 0.35s ease;
+    }
+
+    .question-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .question-note {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.3rem;
+    }
+
+    .encouragement {
+      font-size: 0.9rem;
+      color: var(--blue);
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
+
+    .options {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .option {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: white;
+      text-align: left;
+    }
+
+    .option:hover {
+      border-color: var(--blue);
+      background: #F5FBFD;
+    }
+
+    .option.selected {
+      border-color: var(--blue);
+      background: #EBF6FA;
+    }
+
+    .option .radio {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #C5D0D6;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option.selected .radio { border-color: var(--blue); }
+
+    .option.selected .radio::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: var(--blue);
+      border-radius: 50%;
+    }
+
+    .options.grid-2 { grid-template-columns: 1fr 1fr; }
+
+    @media (max-width: 560px) {
+      .options.grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .form-group { margin-bottom: 1.1rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.8rem;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: var(--blue-dark); }
+
+    .btn:disabled {
+      background: #A0C4D4;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--muted);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: transparent;
+    }
+
+    .result-box {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .result-box h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .result-box p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .status-message {
+      display: none;
+      margin: 0 0 1.2rem;
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+    }
+
+    .status-message.error {
+      display: block;
+      background: #FEF3F2;
+      border: 1px solid #FECACA;
+      color: var(--error);
+    }
+
+    footer {
+      background: #081E28;
+      color: #8BA3B0;
+      padding: 1.8rem 5%;
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    footer a { color: #B8D4E0; }
+
+    .disclaimer {
+      max-width: 780px;
+      margin: 0.9rem auto 0;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      color: #6A8794;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="back">← Back</a>
+    <div class="logo">
+      <a href="index.html">
+        <img src="kisasa-logo.png" alt="Kisasa" />
+      </a>
+    </div>
+    <div style="width:60px"></div>
+  </header>
+
+  <main>
+    <div style="text-align:center">
+      <div class="badge">◆ KISASA CREDIT RESTORATION</div>
+      <h1>FREE DEBT REVIEW REMOVAL CHECK</h1>
+      <p class="intro">
+        Answer 6 quick questions so our qualified legal partners can confirm
+        whether you legally qualify to exit debt review.
+      </p>
+
+      <div class="trust-row">
+        <span>⏱ 60 seconds</span>
+        <span>🛡 Confidential</span>
+        <span>✓ No obligation</span>
+      </div>
+
+      <div class="warning-box">
+        ⚠ Subject to qualification. Eligibility check does not guarantee removal
+        from debt review.
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="qLabel">Question 1 of 6</span>
+        <span id="pctLabel">0% complete</span>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div id="quizArea"></div>
+  </main>
+
+  <footer>
+    <p><strong>DEBT REVIEW REMOVAL AND CREDIT CLEARANCE</strong></p>
+    <p style="margin-top:0.4rem">
+      Kisasa · 50 Long Street, Cape Town City Centre, Cape Town, 8000 ·
+      087 806 3046 ·
+      <a href="mailto:info@kisasa.co.za">info@kisasa.co.za</a>
+    </p>
+
+    <p class="disclaimer">
+      Disclaimer: Kisasa assists with debt review removal, credit listing
+      clearance and judgment rescission. Every application is subject to
+      assessment and outcomes are not guaranteed, as timelines and results
+      depend on your credit profile, your court order status and the response
+      of the credit bureaus. Kisasa is not a debt counsellor, does not provide
+      debt counselling or credit, and does not offer financial advice. Kisasa
+      is NCR registered (NCRDC3882).
+    </p>
+
+    <p style="margin-top:0.9rem">
+      © 2026 Kisasa. All rights reserved. · Standalone version for private use.
+    </p>
+  </footer>
+
+  
+  <script src="kisasa-tracking.js"></script>
+
+  <script>
+   
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx20XMZuIJkML40Db4U3GqExSZi0edroxKt0DfROuhjTckCxdqNLLkq-nuLGNj0JoC7AQ/exec";
+
+    const questions = [
+      {
+        title: "WHY DO YOU WANT TO BE REMOVED FROM DEBT REVIEW?",
+        type: "single",
+        grid: true,
+        options: [
+          "I have paid all my debt",
+          "I want to manage my own debt again",
+          "I only have my home loan left",
+          "I can now afford my monthly instalments",
+          "My financial situation has improved",
+          "I need finance for a vehicle",
+          "I want to buy a house",
+          "My debt review was started without my knowledge",
+          "Other"
+        ]
+      },
+      {
+        title: "HAVE YOU PAID ALL THE ACCOUNTS THAT WERE INCLUDED IN YOUR DEBT REVIEW?",
+        type: "single",
+        options: ["Yes", "No", "I am not sure"]
+      },
+      {
+        title: "DO YOU HAVE A HOME LOAN IN YOUR DEBT REVIEW?",
+        note: "This just helps us route your file correctly. It does not affect eligibility.",
+        type: "single",
+        options: ["Yes", "No", "I do not have a home loan"]
+      },
+      {
+        title: "ARE YOU CURRENTLY EMPLOYED OR EARNING A REGULAR INCOME?",
+        encouragement: "✅ Great progress. You're halfway through.",
+        type: "single",
+        options: ["Full-time", "Self-employed", "Contract", "Pension", "Unemployed"]
+      },
+      {
+        title: "IS THERE A DEBT REVIEW COURT ORDER OR NCT MATTER ALREADY IN PLACE AGAINST YOU?",
+        note: 'This is status D4 on your credit profile. If you are unsure, choose "I am not sure".',
+        encouragement: "🔥 Over halfway there. Just a couple more.",
+        type: "single",
+        options: ["No", "Yes", "I am not sure"]
+      },
+      {
+        title: "WHICH OF THESE BEST DESCRIBES WHERE YOU ARE RIGHT NOW?",
+        note: "Pick the option closest to your situation.",
+        encouragement: "🎯 Last question. Your eligibility check is almost ready!",
+        type: "single",
+        options: [
+          "I have paid all my debt",
+          "I am still paying off unsecured accounts (cards, loans, store accounts)",
+          "I have not received my clearance certificate",
+          "I can now afford my repayments on my own",
+          "I was placed under debt review without my knowledge"
+        ]
+      }
+    ];
+
+    let current = 0;
+    const answers = {};
+    let isSubmitting = false;
+
+    function getUTM(name) {
+      return new URLSearchParams(window.location.search).get(name) || "";
+    }
+
+    function getLandingPage() {
+      return (window.KisasaTracking && KisasaTracking.landingPage()) ||
+        window.location.pathname.split("/").pop() || "index.html";
+    }
+
+    function render() {
+      const q = questions[current];
+      const pct = Math.round((current / questions.length) * 100);
+
+      document.getElementById("qLabel").textContent =
+        `Question ${current + 1} of ${questions.length}`;
+
+      document.getElementById("pctLabel").textContent =
+        `${pct}% complete`;
+
+      document.getElementById("progressFill").style.width = pct + "%";
+
+      let html = "";
+
+      if (q.encouragement) {
+        html += `<div class="encouragement">${q.encouragement}</div>`;
+      }
+
+      html += `<div class="question-title">${escapeHtml(q.title)}</div>`;
+
+      if (q.note) {
+        html += `<div class="question-note">${escapeHtml(q.note)}</div>`;
+      }
+
+      const gridClass = q.grid ? "options grid-2" : "options";
+      html += `<div class="${gridClass}">`;
+
+      q.options.forEach((opt) => {
+        const selected = answers[current] === opt ? "selected" : "";
+
+        html += `
+          <div class="option ${selected}"
+               data-value="${escapeHtmlAttribute(opt)}"
+               onclick="selectOption(this)">
+            <div class="radio"></div>
+            <span>${escapeHtml(opt)}</span>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+
+      html += `
+        <div class="nav-row">
+          <button class="btn btn-outline"
+                  onclick="goBack()"
+                  ${current === 0 ? "disabled" : ""}>
+            Back
+          </button>
+
+          <button class="btn"
+                  id="nextBtn"
+                  onclick="goNext()"
+                  ${!answers[current] ? "disabled" : ""}>
+            Continue
+          </button>
+        </div>
+      `;
+
+      document.getElementById("quizArea").innerHTML = html;
+    }
+
+    function selectOption(el) {
+      document.querySelectorAll(".option")
+        .forEach(o => o.classList.remove("selected"));
+
+      el.classList.add("selected");
+      answers[current] = el.getAttribute("data-value");
+
+      document.getElementById("nextBtn").disabled = false;
+    }
+
+    function goBack() {
+      if (current > 0) {
+        current--;
+        render();
+      }
+    }
+
+    function goNext() {
+      if (!answers[current]) return;
+
+      if (current < questions.length - 1) {
+        current++;
+        render();
+      } else {
+        showContactForm();
+      }
+    }
+
+    function showContactForm() {
+      document.getElementById("qLabel").textContent = "Almost done";
+      document.getElementById("pctLabel").textContent = "95% complete";
+      document.getElementById("progressFill").style.width = "95%";
+
+      document.getElementById("quizArea").innerHTML = `
+        <div class="question-title">WHERE SHOULD WE SEND YOUR RESULT?</div>
+
+        <p class="question-note">
+          A case manager will review your answers and contact you with a
+          straight answer.
+        </p>
+
+        <div id="statusMessage" class="status-message"></div>
+
+        <form onsubmit="submitLead(event)">
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input type="text"
+                   id="name"
+                   required
+                   autocomplete="name"
+                   placeholder="Name and surname" />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Mobile number</label>
+            <input type="tel"
+                   id="phone"
+                   required
+                   autocomplete="tel"
+                   placeholder="e.g. 082 123 4567" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email"
+                   id="email"
+                   required
+                   autocomplete="email"
+                   placeholder="you@email.com" />
+          </div>
+
+          <div class="nav-row">
+            <button type="button"
+                    class="btn btn-outline"
+                    onclick="current=5; render()">
+              Back
+            </button>
+
+            <button type="submit" class="btn" id="submitBtn">
+              Get my result
+            </button>
+          </div>
+        </form>
+      `;
+    }
+
+    async function submitLead(e) {
+      e.preventDefault();
+
+      if (isSubmitting) return;
+
+      if (!GOOGLE_SCRIPT_URL ||
+          GOOGLE_SCRIPT_URL === "PASTE_YOUR_GOOGLE_APPS_SCRIPT_EXEC_URL_HERE") {
+        showError(
+          "The Google Sheets connection has not been configured yet. " +
+          "Please add the Google Apps Script /exec URL to this page."
+        );
+        return;
+      }
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (!name || !phone || !email) return;
+
+      isSubmitting = true;
+
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      const payload = {
+        fullName: name,
+        phone: phone,
+        email: email,
+        answers: answers,
+        questionTitles: questions.map(q => q.title),
+        utmSource: getUTM("utm_source"),
+        utmMedium: getUTM("utm_medium"),
+        utmCampaign: getUTM("utm_campaign"),
+        utmContent: getUTM("utm_content"),
+        landingPage: getLandingPage()
+      };
+
+      try {
+        /*
+         * text/plain + no-cors avoids a browser CORS preflight.
+         * Google Apps Script receives the POST and writes the row.
+         */
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        /*
+         * With no-cors, the browser cannot read the Apps Script response.
+         * The request has been sent to the endpoint, so show the completion
+         * state after the request resolves.
+         */
+        document.getElementById("qLabel").textContent = "Complete";
+        document.getElementById("pctLabel").textContent = "100% complete";
+        document.getElementById("progressFill").style.width = "100%";
+
+        document.getElementById("quizArea").innerHTML = `
+          <div class="result-box">
+            <h2>Thank you, ${escapeHtml(name.split(" ")[0])}!</h2>
+
+            <p>
+              We have received your answers. A Kisasa case manager will
+              contact you shortly on
+              <strong>${escapeHtml(phone)}</strong>
+              with a clear answer on whether you qualify for debt review
+              removal.
+            </p>
+
+            <p style="font-size:0.9rem">
+              Your assessment has been submitted for review.
+            </p>
+
+            <a href="index.html"
+               class="btn"
+               style="margin-top:1rem">
+              Back to home
+            </a>
+          </div>
+        `;
+
+      } catch (error) {
+        console.error("Lead submission error:", error);
+
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Get my result";
+
+        showError(
+          "We could not submit your assessment right now. " +
+          "Please check your connection and try again."
+        );
+      }
+    }
+
+    function showError(message) {
+      const box = document.getElementById("statusMessage");
+
+      if (box) {
+        box.textContent = message;
+        box.className = "status-message error";
+      } else {
+        alert(message);
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function escapeHtmlAttribute(value) {
+      return escapeHtml(value);
+    }
+
+    render();
+  </script>
+</body>
+</html>

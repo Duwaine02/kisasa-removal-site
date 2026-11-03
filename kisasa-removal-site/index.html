@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debt Review Removal In South Africa | Standalone</title>
+  <meta name="description" content="Specialist-led debt review removal, listing clearance and judgment rescission for South Africans." />
+  <style>
+    :root {
+      --blue: #007DA7;
+      --blue-dark: #006288;
+      --navy: #0B2C3D;
+      --text: #121212;
+      --muted: #555;
+      --light: #F7F9FA;
+      --white: #FFFFFF;
+      --border: #E5E9EC;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background: var(--white);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--blue);
+      color: white !important;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover { background: var(--blue-dark); }
+    .btn-outline {
+      background: transparent;
+      color: var(--blue) !important;
+      border: 2px solid var(--blue);
+    }
+    .btn-outline:hover { background: var(--blue); color: white !important; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0B2C3D 0%, #0E4A63 50%, #0B3A4F 100%);
+      color: white;
+      padding: 5.5rem 5% 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,125,167,0.25) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #B8D4E0;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      margin-bottom: 1.8rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      max-width: 900px;
+      margin: 0 auto 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 .accent { color: #4DB8D9; }
+    .hero p {
+      font-size: 1.1rem;
+      color: #C5D8E3;
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Trust bar */
+    .trust {
+      background: var(--light);
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      border-bottom: 1px solid var(--border);
+    }
+    .trust span { display: flex; align-items: center; gap: 0.4rem; }
+
+    /* Sections */
+    section { padding: 4.5rem 5%; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--blue);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .lead { font-size: 1.1rem; color: var(--muted); max-width: 700px; margin-bottom: 2rem; }
+
+    /* Problem cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.92rem; color: var(--muted); }
+
+    /* Services */
+    .services { background: var(--light); }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .service {
+      background: white;
+      border-radius: 10px;
+      padding: 1.8rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .service-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+    }
+    .service h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+    .service p { color: var(--muted); font-size: 0.95rem; }
+
+    /* Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .step {
+      position: relative;
+      padding: 1.8rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .step-num {
+      width: 42px; height: 42px;
+      background: var(--blue);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .step h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .step p { color: var(--muted); font-size: 0.93rem; }
+
+    /* Eligibility */
+    .eligibility {
+      background: var(--navy);
+      color: white;
+    }
+    .eligibility h2 { color: white; }
+    .eligibility .lead { color: #A8C5D4; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+    .col-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 1.6rem;
+    }
+    .col-box h3 { font-size: 1rem; margin-bottom: 1rem; color: #4DB8D9; }
+    .col-box ul { list-style: none; }
+    .col-box li {
+      padding: 0.4rem 0 0.4rem 1.4rem;
+      position: relative;
+      font-size: 0.93rem;
+      color: #D0E0EA;
+    }
+    .col-box li::before {
+      content: "•";
+      position: absolute; left: 0;
+      color: #4DB8D9;
+      font-weight: bold;
+    }
+
+    /* FAQ */
+    .faq-list { margin-top: 2rem; max-width: 800px; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 0;
+    }
+    .faq-item summary {
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.02rem;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; font-size: 1.3rem; color: var(--blue); }
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-item p {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding-right: 1.5rem;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, #0B2C3D, #0E4A63);
+      color: white;
+      text-align: center;
+      padding: 5rem 5%;
+    }
+    .final-cta h2 { color: white; margin-bottom: 0.8rem; }
+    .final-cta p { color: #B8D4E0; max-width: 560px; margin: 0 auto 1.8rem; }
+
+    /* Footer */
+    footer {
+      background: #081E28;
+      color: #8BA3B0;
+      padding: 2.5rem 5%;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    footer a { color: #B8D4E0; }
+    footer .disclaimer {
+      max-width: 800px;
+      margin: 1.2rem auto 0;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: #6A8794;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="kisasa-logo.png" alt="Kisasa" />
+    </div>
+    <a href="removal-assessment.html" class="btn">CHECK IF I QUALIFY FOR REMOVAL</a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge">● FREE ELIGIBILITY CHECK FOR SOUTH AFRICANS UNDER DEBT REVIEW</div>
+    <h1>YOU HAVE FINISHED PAYING, BUT YOUR CREDIT RECORD STILL SAYS DEBT REVIEW. 
+      <span class="accent">LET US GET YOU CLEARED.</span></h1>
+    <p>Every bond, vehicle finance and credit application you make is being read against that flag, and it stays there until someone formally clears it.</p>
+    <div class="hero-ctas">
+      <a href="removal-assessment.html" class="btn">CHECK IF I QUALIFY FOR REMOVAL</a>
+    </div>
+    <p style="margin-top:1.5rem; font-size:0.9rem; color:#A8C5D4;">Free. No obligation. Six quick questions.</p>
+  </section>
+
+  <!-- Trust -->
+  <div class="trust">
+    <span>✓ NCR REGISTERED: NCRDC3882</span>
+    <span>✓ QUALIFIED LEGAL PARTNERS</span>
+    <span>✓ CAPE TOWN BASED, SERVING ALL OF SA</span>
+  </div>
+
+  <!-- Problem -->
+  <section>
+    <div class="container">
+      <div class="section-label">THE PART NOBODY WARNED YOU ABOUT</div>
+      <h2>Debt review protected you when you needed it. Now it is the thing holding you back.</h2>
+      <p class="lead">Coming off debt review is a legal process with paperwork, a court application and bureau updates, and it does not happen on its own. We and our legal partners run that process for you from the first phone call to the day your record is updated.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Settled but still flagged</h3>
+          <p>Your accounts are settled but no clearance certificate was ever issued, so the bureaus still list you as under review.</p>
+        </div>
+        <div class="card">
+          <h3>Placed without full picture</h3>
+          <p>You were placed under debt review without the full picture being explained to you, and nobody will correct it.</p>
+        </div>
+        <div class="card">
+          <h3>Old judgments lingering</h3>
+          <p>A judgment or an adverse listing is sitting on your profile long after the money was sorted out.</p>
+        </div>
+        <div class="card">
+          <h3>Income recovered</h3>
+          <p>Your income has recovered and you can carry your own accounts, but every lender still sees a flag.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <div class="container">
+      <div class="section-label">WHAT WE HANDLE</div>
+      <h2>Three ways we clean up what is on your credit record.</h2>
+
+      <div class="service-grid">
+        <div class="service">
+          <div class="service-num">01 — DEBT REVIEW REMOVAL</div>
+          <h3>Debt Review Removal</h3>
+          <p>We lift the debt review flag and the debt counselling record so lenders stop reading you as a consumer under review.</p>
+        </div>
+        <div class="service">
+          <div class="service-num">02 — LISTING CLEARANCE</div>
+          <h3>Listing & Blacklist Clearance</h3>
+          <p>We clear adverse listings and prescribed debt that has no business sitting on your credit report any longer.</p>
+        </div>
+        <div class="service">
+          <div class="service-num">03 — JUDGMENT RESCISSION</div>
+          <h3>Judgment Rescission</h3>
+          <p>We apply to have judgments rescinded and make sure the bureaus update your record afterwards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section>
+    <div class="container">
+      <div class="section-label">HOW IT RUNS</div>
+      <h2>Three steps, and you do the easy one. We do the rest.</h2>
+
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Answer six questions</h3>
+          <p>You tell us where your accounts stand and whether a court order was ever granted, and we tell you straight away whether removal, listing clearance or a rescission is even on the table for you.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Your case manager takes over</h3>
+          <p>One named case manager opens your file, gathers your documents and hands it to our legal partners, who prepare the application and court paperwork.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Cleared and back in the market</h3>
+          <p>Once the process is complete and the bureaus are updated, you can apply for credit again without the debt review flag working against you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it is for -->
+  <section class="eligibility">
+    <div class="container">
+      <div class="section-label" style="color:#4DB8D9;">IS REMOVAL RIGHT FOR YOU?</div>
+      <h2>Removal is not right for everybody. Here is where you would sit.</h2>
+
+      <div class="two-col">
+        <div class="col-box">
+          <h3>REMOVAL COULD BE THE RIGHT MOVE IF:</h3>
+          <ul>
+            <li>Your accounts under the debt review are paid up or close to settled.</li>
+            <li>You have a steady income you can count on every month.</li>
+            <li>You want to apply for a bond, vehicle finance or new credit lines.</li>
+            <li>No court order (or only a manageable one) is currently in place.</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <h3>IT IS BETTER TO STAY UNDER DEBT REVIEW IF:</h3>
+          <ul>
+            <li>You still cannot cover your accounts without the arrangement in place.</li>
+            <li>You are on status D4 (court order or NCT matter already exists).</li>
+            <li>You have no steady income coming in at the moment.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why act now -->
+  <section>
+    <div class="container">
+      <div class="section-label">WHY WAITING COSTS YOU</div>
+      <h2>Every month that flag stays up is another month of being declined by default.</h2>
+      <p class="lead">A debt review flag does not quietly fade away. Court rolls are not getting shorter either — the earlier your file is prepared, the earlier your clearance can be issued and the bureaus updated.</p>
+      <p style="color:var(--muted); max-width:700px;">Your file goes to our legal partners once payment is settled and every required document is in. From that handover the process can run from two weeks to a few months depending on your profile and the court roll.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:var(--light);">
+    <div class="container">
+      <div class="section-label">FREQUENTLY ASKED</div>
+      <h2>Everything you might be wondering about debt review removal.</h2>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Can I take myself off debt review?</summary>
+          <p>In most cases you cannot simply “opt out”. A formal process involving your debt counsellor (or a new application) and often the court is required before the bureaus will update your status.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if a court order was already granted against me?</summary>
+          <p>A court order does not automatically block removal, but it does change the route. We assess whether a rescission or variation is needed and advise you honestly before any work begins.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How long will this take?</summary>
+          <p>Once documents and payment are complete, the legal process typically ranges from a few weeks to a few months, depending on court rolls and the complexity of your file.</p>
+        </details>
+        <details class="faq-item">
+          <summary>When will lenders actually see a clean record?</summary>
+          <p>After the clearance or order is granted, the credit bureaus still need to update. This can take additional time. Your case manager will keep you informed of progress.</p>
+        </details>
+        <details class="faq-item">
+          <summary>I still owe money on one or two accounts — is that a problem?</summary>
+          <p>It depends on the amounts and the overall picture. The eligibility check is designed to give you a clear answer on whether removal is realistic in your situation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the eligibility check cost me?</summary>
+          <p>Nothing. The six-question check is free and carries no obligation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Who am I actually dealing with?</summary>
+          <p>You deal with a named case manager and, where required, qualified legal partners. We are NCR registered (NCRDC3882) and based in Cape Town, serving clients across South Africa.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <h2>Six questions now, or another year of explaining a flag you no longer deserve.</h2>
+    <p>Take the free eligibility check and a case manager will call you back with a straight answer on where you stand.</p>
+    <a href="removal-assessment.html" class="btn">CHECK IF I QUALIFY FOR REMOVAL</a>
+    <p style="margin-top:1rem; font-size:0.9rem; color:#8BA3B0;">Free. No obligation. Six quick questions.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>DEBT REVIEW REMOVAL AND CREDIT CLEARANCE</strong></p>
+    <p style="margin-top:0.6rem;">
+      Kisasa · 50 Long Street, Cape Town City Centre, Cape Town, 8000 · 087 806 3046 · 
+      <a href="mailto:info@kisasa.co.za">info@kisasa.co.za</a>
+    </p>
+    <p class="disclaimer">
+      Disclaimer: This service assists with debt review removal, credit listing clearance and judgment rescission. Every application is subject to assessment and outcomes are not guaranteed, as timelines and results depend on your credit profile, your court order status and the response of the credit bureaus. This is not a debt counsellor, does not provide debt counselling or credit, and does not offer financial advice. NCR registered (NCRDC3882).
+    </p>
+    <p style="margin-top:1.2rem;">© 2026 · All rights reserved. This is a standalone recreation for private use.</p>
+  </footer>
+
+  <!-- Keeps UTM tags when visitors click through to removal-assessment.html -->
+  <script src="kisasa-tracking.js"></script>
+</body>
+</html>
